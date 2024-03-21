@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Choice Questions</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header1">
+        <h1>Welcome to the Dashboard!</h1>
+    </div>
+
+    <div class="dashboard-container">
+        <form id="quiz-form">
+            <div class="question">
+                <h2>Question 1: What is the capital of France?</h2>
+                <label for="paris">
+                    <input type="radio" id="paris" name="question1" value="paris" required>
+                    Paris
+                </label><br>
+                <label for="london">
+                    <input type="radio" id="london" name="question1" value="london" >
+                    London
+                </label><br>
+                <label for="berlin">
+                    <input type="radio" id="berlin" name="question1" value="berlin" >
+                    Berlin
+                </label><br>
+                <label for="rome">
+                    <input type="radio" id="rome" name="question1" value="rome" >
+                    Rome
+                </label><br>
+            </div>
+
+            <div class="question">
+                <h2>Question 2: What is the capital of Germany?</h2>
+                <label for="paris">
+                    <input type="radio" id="berlin2" name="question2" value="berlin" required>
+                    Berlin
+                </label><br>
+                <label for="london">
+                    <input type="radio" id="london2" name="question2" value="london">
+                    London
+                </label><br>
+                <label for="paris">
+                    <input type="radio" id="paris2" name="question2" value="paris">
+                    Paris
+                </label><br>
+                <label for="rome">
+                    <input type="radio" id="rome2" name="question2" value="rome">
+                    Rome
+                </label><br>
+            </div>
+
+            <!-- Add more questions if needed -->
+
+            <button type="submit" class="submit_button">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('quiz-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            window.location.href = '../submission/index.html'; 
+        });
+    </script>
+</body>
+</html>
+

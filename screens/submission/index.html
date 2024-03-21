@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - Sign In</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header></header>
+    <main>
+        <div class="container">
+          <h2 class="thank">
+            Thank you for submitting your attendance.
+          </h2>
+          <input type="submit" value="Sign Out" class="signout_button">
+          <div class="green"></div>  
+        </div>
+    </main>
+    <footer></footer>
+</body>
+
+<script>
+  document.querySelector('.signout_button').addEventListener('click', function() {
+
+    window.location.href = '../authentication/index.html'; 
+  });
+</script>
+
+</html>
