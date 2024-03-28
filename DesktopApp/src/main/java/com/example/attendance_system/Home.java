@@ -25,8 +25,9 @@ public class Home extends Application {
 
     public static void main(String[] args) {
 
+        launch();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendanceDB", "root", "Icecream123");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendanceDB", "root", "password");
 
             Statement statement = connection.createStatement();
 

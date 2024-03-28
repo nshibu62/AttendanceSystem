@@ -16,31 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `classes`
+-- Table structure for table `passwords`
 --
 
-DROP TABLE IF EXISTS `classes`;
+DROP TABLE IF EXISTS `passwords`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `classes` (
-  `class_id` varchar(255) NOT NULL,
-  `class_name` varchar(255) DEFAULT NULL,
-  `prof_name` varchar(255) DEFAULT NULL,
-  `start_time` time DEFAULT NULL,
-  `end_time` time DEFAULT NULL,
-  `start_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL,
-  PRIMARY KEY (`class_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE `passwords` (
+  `password_ID` int NOT NULL AUTO_INCREMENT,
+  `password` varchar(255) DEFAULT NULL,
+  `class_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`password_ID`),
+  KEY `class_id` (`class_id`),
+  CONSTRAINT `passwords_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classes` (`class_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `classes`
+-- Dumping data for table `passwords`
 --
 
-LOCK TABLES `classes` WRITE;
-/*!40000 ALTER TABLE `classes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `classes` ENABLE KEYS */;
+LOCK TABLES `passwords` WRITE;
+/*!40000 ALTER TABLE `passwords` DISABLE KEYS */;
+INSERT INTO `passwords` VALUES (7,'test',NULL),(8,'test',NULL),(9,'1',NULL),(10,'2',NULL),(11,'3',NULL),(12,'123123',NULL),(13,'13123',NULL),(14,'123123',NULL),(15,'123123',NULL),(16,'13123',NULL),(17,'123123',NULL);
+/*!40000 ALTER TABLE `passwords` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-21 13:37:19
+-- Dump completed on 2024-03-28 14:08:39

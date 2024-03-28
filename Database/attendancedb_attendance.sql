@@ -16,29 +16,40 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `student`
+-- Table structure for table `attendance`
 --
 
-DROP TABLE IF EXISTS `student`;
+DROP TABLE IF EXISTS `attendance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `student` (
-  `UTD_ID` varchar(255) NOT NULL,
-  `first_name` varchar(255) DEFAULT NULL,
-  `middle_name` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`UTD_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE `attendance` (
+  `attendance_ID` int NOT NULL AUTO_INCREMENT,
+  `IP` varchar(255) DEFAULT NULL,
+  `date_Atten` date DEFAULT NULL,
+  `time_Atten` time DEFAULT NULL,
+  `student_status` varchar(255) DEFAULT NULL,
+  `excused` tinyint(1) DEFAULT NULL,
+  `grade` int DEFAULT NULL,
+  `UTD_ID` varchar(255) DEFAULT NULL,
+  `class_id` varchar(255) DEFAULT NULL,
+  `response1` varchar(45) DEFAULT NULL,
+  `response2` varchar(45) DEFAULT NULL,
+  `response3` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`attendance_ID`),
+  KEY `UTD_ID` (`UTD_ID`),
+  KEY `class_id` (`class_id`),
+  CONSTRAINT `attendance_ibfk_2` FOREIGN KEY (`UTD_ID`) REFERENCES `student` (`UTD_ID`),
+  CONSTRAINT `attendance_ibfk_3` FOREIGN KEY (`class_id`) REFERENCES `classes` (`class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `student`
+-- Dumping data for table `attendance`
 --
 
-LOCK TABLES `student` WRITE;
-/*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES ('axa190001	','Ashika Prakash',NULL,'Smith'),('dxa190001','Dhanushu',NULL,'Jones'),('sib170001','Shannon',NULL,'Smythe Jones');
-/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+LOCK TABLES `attendance` WRITE;
+/*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-21 13:37:18
+-- Dump completed on 2024-03-28 14:08:40

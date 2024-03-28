@@ -16,36 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `quiz`
+-- Table structure for table `student`
 --
 
-DROP TABLE IF EXISTS `quiz`;
+DROP TABLE IF EXISTS `student`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `quiz` (
-  `quiz_id` int NOT NULL AUTO_INCREMENT,
-  `question_id_1` int DEFAULT NULL,
-  `question_id_2` int DEFAULT NULL,
-  `question_id_3` int DEFAULT NULL,
-  `start_time` time DEFAULT NULL,
-  `end_time` time DEFAULT NULL,
-  PRIMARY KEY (`quiz_id`),
-  KEY `question_id_1` (`question_id_1`),
-  KEY `question_id_2` (`question_id_2`),
-  KEY `question_id_3` (`question_id_3`),
-  CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`question_id_1`) REFERENCES `question` (`question_id`),
-  CONSTRAINT `quiz_ibfk_2` FOREIGN KEY (`question_id_2`) REFERENCES `question` (`question_id`),
-  CONSTRAINT `quiz_ibfk_3` FOREIGN KEY (`question_id_3`) REFERENCES `question` (`question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE `student` (
+  `UTD_ID` varchar(255) NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `middle_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`UTD_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `quiz`
+-- Dumping data for table `student`
 --
 
-LOCK TABLES `quiz` WRITE;
-/*!40000 ALTER TABLE `quiz` DISABLE KEYS */;
-/*!40000 ALTER TABLE `quiz` ENABLE KEYS */;
+LOCK TABLES `student` WRITE;
+/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` VALUES ('axa190001	','Ashika Prakash',NULL,'Smith'),('dxa190001','Dhanushu',NULL,'Jones'),('sib170001','Shannon',NULL,'Smythe Jones');
+/*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-21 13:37:19
+-- Dump completed on 2024-03-28 14:08:39
