@@ -9,9 +9,9 @@
 
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.attendance_system.CreateQuizController">
+            fx:controller="com.example.attendance_system.QuestionBankController">
     <GridPane hgap="10" vgap="10">
-        <Label text="Create Quiz" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Question Bank" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 
         <ComboBox fx:id="courseBox" promptText="Choose Course" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <items>

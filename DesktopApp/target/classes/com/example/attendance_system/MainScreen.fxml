@@ -13,7 +13,7 @@
             <Menu text="Menu">
                 <items>
                     <MenuItem text="Attendance Report" onAction="#loadAttendance"/>
-                    <MenuItem text="Create Quiz" onAction="#loadCreateQuiz"/>
+                    <MenuItem text="Question Bank" onAction="#loadQuestionBank"/>
                     <MenuItem text="Password Bank" onAction="#loadPasswordBank"/>
                     <MenuItem text="Configure Quiz" onAction="#loadConfigureQuiz"/>
                 </items>

@@ -16,8 +16,8 @@ public class MainController {
     }
 
     @FXML
-    void loadCreateQuiz() {
-        loadScreen("CreateQuiz.fxml");
+    void loadQuestionBank() {
+        loadScreen("QuestionBank.fxml");
     }
 
     @FXML
