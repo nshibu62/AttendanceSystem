@@ -6,10 +6,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class PasswordBankController {
     @FXML
@@ -19,6 +16,26 @@ public class PasswordBankController {
     private void addContainer() {
         TextField passwordText = new TextField();
         containers.getChildren().add(passwordText);
+    }
+
+    @FXML
+    private void showPasswordBank() {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendanceDB", "root", "Icecream123");
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("select * from passwords");
+
+            while (resultSet.next()) {
+                System.out.println(resultSet.getString("password"));
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            System.out.println("unsuccessful");
+        }
     }
 
     @FXML
