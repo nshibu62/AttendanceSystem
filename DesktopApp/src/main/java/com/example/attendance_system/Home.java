@@ -26,22 +26,22 @@ public class Home extends Application {
     public static void main(String[] args) {
 
         launch();
-//        try {
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendanceDB", "root", "Icecream123");
-//
-//            Statement statement = connection.createStatement();
-//
-//            ResultSet resultSet = statement.executeQuery("select * from student");
-//
-//            while (resultSet.next()) {
-//                System.out.println(resultSet.getString("UTD_ID"));
-//            }
-//
-//            launch();
-//
-//        }
-//        catch(Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendanceDB", "root", "password");
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("select * from student");
+
+            while (resultSet.next()) {
+                System.out.println(resultSet.getString("UTD_ID"));
+            }
+
+            launch();
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
