@@ -16,6 +16,7 @@
                     <MenuItem text="Question Bank" onAction="#loadQuestionBank"/>
                     <MenuItem text="Password Bank" onAction="#loadPasswordBank"/>
                     <MenuItem text="Configure Quiz" onAction="#loadConfigureQuiz"/>
+                    <MenuItem text="Add Class" onAction="#loadAddClass"/>
                 </items>
             </Menu>
         </menus>

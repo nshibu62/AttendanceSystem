@@ -9,7 +9,7 @@
 
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.attendance_system.CreateQuizController">
+            fx:controller="com.example.attendance_system.ConfigureQuizController">
     <GridPane hgap="10" vgap="10">
         <Label text="Configure Quiz" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 
@@ -32,6 +32,17 @@
                     <String fx:value="1"/>
                     <String fx:value="2"/>
                     <String fx:value="3"/>
+                </FXCollections>
+            </items>
+
+        </ComboBox>
+
+        <ComboBox fx:id="passwordOptions" promptText="Choose Password" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Password 1"/>
+                    <String fx:value="Password 2"/>
+                    <String fx:value="Password 3"/>
                 </FXCollections>
             </items>
 

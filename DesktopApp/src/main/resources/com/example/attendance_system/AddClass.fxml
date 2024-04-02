@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="com.example.attendance_system.AddClassController"
+          prefHeight="400.0" prefWidth="600.0">
+    <Label text="Add Class" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+    <Label text="Class Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <TextField fx:id="classNameId" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+    <Label text="Class ID" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <TextField fx:id="classId" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+    <Label text="Start Time" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <TextField fx:id="startTimeId" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+    <Label text="End Time" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <TextField fx:id="endTimeId" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+
+    <Label text="Start Date" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <TextField fx:id="startDateId" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+    <Label text="End Date" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+    <TextField fx:id="endDateId" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+
+</GridPane>

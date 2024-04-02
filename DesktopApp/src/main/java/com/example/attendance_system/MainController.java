@@ -30,6 +30,11 @@ public class MainController {
         loadScreen("ConfigureQuiz.fxml");
     }
 
+    @FXML
+    void loadAddClass() {
+        loadScreen("AddClass.fxml");
+    }
+
     private void loadScreen(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
