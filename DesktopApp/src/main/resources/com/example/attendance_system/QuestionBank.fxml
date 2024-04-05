@@ -13,16 +13,16 @@
     <GridPane hgap="10" vgap="10">
         <Label text="Question Bank" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 
-        <ComboBox fx:id="courseBox" promptText="Choose Course" GridPane.columnIndex="0" GridPane.rowIndex="1">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Option 1"/>
-                    <String fx:value="Option 2"/>
-                    <String fx:value="Option 3"/>
-                </FXCollections>
-            </items>
+        <ComboBox fx:id="courseBox" promptText="Choose Course" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+<!--            <items>-->
+<!--                <FXCollections fx:factory="observableArrayList">-->
+<!--                    <String fx:value="Option 1"/>-->
+<!--                    <String fx:value="Option 2"/>-->
+<!--                    <String fx:value="Option 3"/>-->
+<!--                </FXCollections>-->
+<!--            </items>-->
 
-        </ComboBox>
+<!--        </ComboBox>-->
 
         <Button text="Add Question" onAction="#addContainer" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 

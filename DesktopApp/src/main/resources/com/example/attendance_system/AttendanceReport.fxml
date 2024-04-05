@@ -16,16 +16,16 @@
 
     <Button fx:id="uploadButton" text="Upload File" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-    <ComboBox fx:id="courseBox" promptText="Choose Course" GridPane.columnIndex="0" GridPane.rowIndex="1">
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Option 1"/>
-                <String fx:value="Option 2"/>
-                <String fx:value="Option 3"/>
-            </FXCollections>
-        </items>
+    <ComboBox fx:id="courseBox" promptText="Choose Course" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+<!--        <items>-->
+<!--            <FXCollections fx:factory="observableArrayList">-->
+<!--                <String fx:value="Option 1"/>-->
+<!--                <String fx:value="Option 2"/>-->
+<!--                <String fx:value="Option 3"/>-->
+<!--            </FXCollections>-->
+<!--        </items>-->
 
-    </ComboBox>
+<!--    </ComboBox>-->
 
     <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 

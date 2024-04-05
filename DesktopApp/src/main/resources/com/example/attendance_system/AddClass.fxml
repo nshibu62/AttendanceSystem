@@ -15,21 +15,23 @@
     <Label text="Add Class" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 
     <Label text="Class Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-    <TextField fx:id="classNameId" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <TextField fx:id="classNameId" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="e.g. Computer Science I" />
 
     <Label text="Class ID" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-    <TextField fx:id="classId" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <TextField fx:id="classId" GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="e.g. cs1337.001.24f"/>
 
     <Label text="Start Time" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-    <TextField fx:id="startTimeId" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <TextField fx:id="startTimeId" GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="e.g. HH:mm:ss"/>
 
     <Label text="End Time" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-    <TextField fx:id="endTimeId" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+    <TextField fx:id="endTimeId" GridPane.columnIndex="3" GridPane.rowIndex="3" promptText="e.g. HH:mm:ss"/>
 
     <Label text="Start Date" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-    <TextField fx:id="startDateId" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    <TextField fx:id="startDateId" GridPane.columnIndex="1" GridPane.rowIndex="4" promptText="e.g. YYYY-MM-DD"/>
 
     <Label text="End Date" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-    <TextField fx:id="endDateId" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+    <TextField fx:id="endDateId" GridPane.columnIndex="3" GridPane.rowIndex="4" promptText="e.g. YYYY-MM-DD"/>
+
+    <Button text="Submit" GridPane.columnIndex="0" GridPane.rowIndex="6" onAction="#addClass" />
 
 </GridPane>

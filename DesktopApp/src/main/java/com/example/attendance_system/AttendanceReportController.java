@@ -2,20 +2,32 @@ package com.example.attendance_system;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 public class AttendanceReportController {
     @FXML
     private Button uploadButton;
 
     @FXML
+    private ComboBox<String> courseBox;
+
+    /** Set value of professorId for testing purposes
+     *  but we need to find a way to get the professorId
+     *  when professor accesses desktop app
+     */
+    int professorId = 1;
+
+    @FXML
     private void initialize() {
+        ComboBoxUtils.populateComboBox(courseBox, professorId);
+
         uploadButton.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Open File");
@@ -25,10 +37,8 @@ public class AttendanceReportController {
     }
 
     private void processFile(File file) {
-        try {
-
-            // Connect to MySQL database
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendancedb", "root", "password");
+        // Connect to database
+        try(Connection conn = DatabaseManagerUtils.getConnection()) {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             String format;
@@ -36,6 +46,7 @@ public class AttendanceReportController {
 
             // First line in file
             line = reader.readLine();
+            System.out.println(line);
 
             // File in Coursebook format
             if (line.contains("Coursebook")) {
@@ -57,11 +68,12 @@ public class AttendanceReportController {
                         System.out.println(e);
                     }
 
-                    PreparedStatement statement = conn.prepareStatement("INSERT INTO student (UTD_ID, first_name, middle_name, last_name) VALUES (?, ?, ?, ?)");
-                    statement.setString(1, fields[1]);
-                    statement.setString(2, fields[2]);
-                    statement.setString(3, fields[3]);
-                    statement.setString(4, fields[4]);
+                    PreparedStatement statement = conn.prepareStatement("INSERT INTO student (class_id, UTD_ID, first_name, middle_name, last_name) VALUES (?, ?, ?, ?, ?)");
+                    statement.setString(1, fields[6]);
+                    statement.setString(2, fields[1]);
+                    statement.setString(3, fields[2]);
+                    statement.setString(4, fields[3]);
+                    statement.setString(5, fields[4]);
                     statement.executeUpdate();
                 }
 
@@ -90,9 +102,12 @@ public class AttendanceReportController {
 
             // Close resources
             reader.close();
-            conn.close();
+
+            // Close database connection
+            DatabaseManagerUtils.closeConnection(conn);
         }
         catch(Exception e) {
+            AlertsUtils.showErrorAlert("Failed to process file.");
             e.printStackTrace();
         }
     }

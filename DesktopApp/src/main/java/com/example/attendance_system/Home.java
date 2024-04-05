@@ -5,11 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class Home extends Application {
     @Override
@@ -24,24 +21,6 @@ public class Home extends Application {
     }
 
     public static void main(String[] args) {
-
         launch();
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendanceDB", "root", "password");
-
-            Statement statement = connection.createStatement();
-
-            ResultSet resultSet = statement.executeQuery("select * from student");
-
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString("UTD_ID"));
-            }
-
-            launch();
-
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 }

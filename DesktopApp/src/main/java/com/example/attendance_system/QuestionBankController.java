@@ -12,6 +12,22 @@ public class QuestionBankController {
     private VBox containers;
 
     @FXML
+    private ComboBox<String> courseBox;
+
+    /** Set value of professorId for testing purposes
+     *  but we need to find a way to get the professorId
+     *  when professor accesses desktop app
+     */
+    int professorId = 1;
+
+    @FXML
+    private void initialize() {
+        // Populate the ComboBox with class_id values
+        ComboBoxUtils.populateComboBox(courseBox, professorId);
+
+    }
+
+    @FXML
     private void addContainer() {
         HBox questionContainer = new HBox();
         HBox AContainer = new HBox();
