@@ -31,6 +31,9 @@ public class AddClassController {
     @FXML
     private TextField endDateId;
 
+    int professorId = 1;
+    //int professorId = 2;
+
     /**
      * Handles adding a class.
      */
@@ -50,12 +53,12 @@ public class AddClassController {
             preparedStatement.setDate(5, Date.valueOf(startDateId.getText()));
             preparedStatement.setDate(6, Date.valueOf(endDateId.getText()));
 
-            /**
+            /*
              * Set professor_id to 1 for testing purposes but
              * ideally we should retrieve professor_id from user
              * who's using desktop app
              */
-            preparedStatement.setInt(7, 1);
+            preparedStatement.setInt(7, professorId);
 
             // Execute the update
             int rowsAffected = preparedStatement.executeUpdate();

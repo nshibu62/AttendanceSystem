@@ -23,6 +23,7 @@ public class AttendanceReportController {
      *  when professor accesses desktop app
      */
     int professorId = 1;
+    //int professorId = 2;
 
     @FXML
     private void initialize() {

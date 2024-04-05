@@ -12,6 +12,7 @@ public class ConfigureQuizController {
      *  when professor accesses desktop app
      */
     int professorId = 1;
+    //int professorId = 2;
 
     public void initialize() {
         ComboBoxUtils.populateComboBox(courseBox, professorId);

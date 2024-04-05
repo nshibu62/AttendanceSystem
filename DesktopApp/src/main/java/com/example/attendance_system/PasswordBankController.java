@@ -3,8 +3,10 @@ package com.example.attendance_system;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.sql.*;
@@ -22,6 +24,9 @@ public class PasswordBankController {
     // ObservableList to hold passwords for ListView
     private ObservableList<String> passwords;
 
+    int professorId = 1;
+    //int professorId = 2;
+
     // Initialize method called when FXML is loaded
     @FXML
     private void initialize() {
@@ -34,8 +39,21 @@ public class PasswordBankController {
     // Event handler for adding new password container
     @FXML
     private void addContainer() {
+        // Create a new HBox to contain both password text field and class_id combo box
+        HBox container = new HBox();
+
+        // Create a TextField for the password
         TextField passwordText = new TextField();
-        containers.getChildren().add(passwordText);
+
+        // Create a ComboBox for selecting class_id
+        ComboBox<String> classIdComboBox = new ComboBox<>();
+        ComboBoxUtils.populateComboBox(classIdComboBox, professorId);
+
+        // Add TextField and ComboBox to the container
+        container.getChildren().addAll(passwordText, classIdComboBox);
+
+        // Add the container to the containers VBox
+        containers.getChildren().add(container);
     }
 
     // Event handler for showing password bank
@@ -45,10 +63,14 @@ public class PasswordBankController {
 
         // Connect to database
         try(Connection connection = DatabaseManagerUtils.getConnection()) {
+            // Prepare SQL statement to retrieve passwords
+            String sql = "SELECT passwords.password FROM passwords " +
+                    "INNER JOIN classes ON passwords.class_id = classes.class_id " +
+                    "WHERE classes.professor_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, professorId);
 
-            Statement statement = connection.createStatement();
-
-            ResultSet resultSet = statement.executeQuery("select * from passwords");
+            ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
                 passwords.add(resultSet.getString("password"));
@@ -69,31 +91,39 @@ public class PasswordBankController {
 
     @FXML
     private void handleSubmitButtonClicked() {
+        // Iterate through each container added
         for (javafx.scene.Node node : containers.getChildren()) {
-            if (node instanceof TextField) {
-                String password = ((TextField) node).getText().trim();
-                if (!password.isEmpty()) {
-                    insertPasswordIntoDatabase(password);
+            if (node instanceof HBox) {
+                HBox container = (HBox) node;
+                TextField passwordField = (TextField) container.getChildren().get(0);
+                ComboBox<String> classIdComboBox = (ComboBox<String>) container.getChildren().get(1);
+
+                // Get password and class_id from TextField and ComboBox
+                String password = passwordField.getText().trim();
+                String classId = classIdComboBox.getValue();
+
+                // Insert password and class_id into the database if they are not empty
+                if (!password.isEmpty() && classId != null && !classId.isEmpty()) {
+                    insertPasswordIntoDatabase(password, classId);
                 }
             }
         }
     }
 
     @FXML
-    private void insertPasswordIntoDatabase(String password) {
+    private void insertPasswordIntoDatabase(String password, String classId) {
 
         // Connect to database
-        try(Connection connection = DatabaseManagerUtils.getConnection()) {
-            String sql = "INSERT INTO passwords (password) VALUES (?)";
+        try (Connection connection = DatabaseManagerUtils.getConnection()) {
+            String sql = "INSERT INTO passwords (password, class_id) VALUES (?, ?)";
             PreparedStatement stmt = connection.prepareStatement(sql);
 
             stmt.setString(1, password);
+            stmt.setString(2, classId);
             stmt.executeUpdate();
 
             // Display success alert
             AlertsUtils.showSuccessAlert("Password(s) added successfully!");
-
-            //System.out.println("Password added to database successfully.");
 
             // Close database connection
             DatabaseManagerUtils.closeConnection(connection);
@@ -101,7 +131,7 @@ public class PasswordBankController {
         } catch (SQLException e) {
             // Display fail alert
             AlertsUtils.showErrorAlert("Failed to add password(s).");
-            //System.out.println(STR."Error inserting password into database: \{e.getMessage()}");
+            e.printStackTrace();
         }
 
     }
