@@ -30,7 +30,7 @@ public class ComboBoxUtils {
     }
 
     public static void populatePasswordsComboBox(ComboBox<String> comboBox, String classSelected) {
-        // Connect to the database and populate the ComboBox based on professorId
+        // Connect to the database and populate the ComboBox based on classID
         try (Connection connection = DatabaseManagerUtils.getConnection()) {
             String query = "SELECT password FROM passwords WHERE class_id = ? ";
 
