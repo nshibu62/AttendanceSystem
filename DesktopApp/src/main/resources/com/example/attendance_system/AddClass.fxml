@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-
+<!-- FXML file for adding a class -->
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="com.example.attendance_system.AddClassController"
+          fx:controller="com.example.attendance_system.AddClassController" <!-- Controller class -->
           prefHeight="400.0" prefWidth="600.0">
+
+    <!-- Label for the title -->
     <Label text="Add Class" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 
+    <!-- Labels and text fields for class information -->
     <Label text="Class Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <TextField fx:id="classNameId" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="e.g. Computer Science I" />
 
@@ -32,10 +28,13 @@
     <Label text="End Date" GridPane.columnIndex="2" GridPane.rowIndex="4" />
     <TextField fx:id="endDateId" GridPane.columnIndex="3" GridPane.rowIndex="4" promptText="e.g. YYYY-MM-DD"/>
 
+    <!-- Button to submit class information -->
     <Button text="Submit" GridPane.columnIndex="0" GridPane.rowIndex="6" onAction="#addClass" />
 
-    <!-- Add label for ListView -->
+    <!-- Label for ListView -->
     <Label text="Current Classes" GridPane.columnIndex="10" GridPane.rowIndex="7" />
+
+    <!-- ListView to display current classes -->
     <ListView fx:id="classesListView" GridPane.columnIndex="10" GridPane.rowIndex="8"/>
 
 </GridPane>
