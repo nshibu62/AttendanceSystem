@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<!-- FXML file for the question bank -->
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.attendance_system.QuestionBankController">
+
+    <!-- GridPane to organize components -->
     <GridPane hgap="10" vgap="10">
+
+        <!-- Label for the title -->
         <Label text="Question Bank" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 
+        <!-- ComboBox to choose a course -->
         <ComboBox fx:id="courseBox" onAction="#handleCourseSelection" promptText="Choose Course" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 
+        <!-- Button to add a question -->
         <Button text="Add Question" onAction="#addContainer" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
+        <!-- VBox to hold question containers -->
         <VBox fx:id="containers" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 
+        <!-- Button to submit questions -->
         <Button text="Submit" onAction="#submitQuestions" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
     </GridPane>
 </ScrollPane>
