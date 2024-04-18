@@ -1,13 +1,13 @@
 package com.example.attendance_system;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.Time;
+import java.sql.*;
 
 /**
  * Controller class for adding a class.
@@ -31,14 +31,61 @@ public class AddClassController {
     @FXML
     private TextField endDateId;
 
+    @FXML
+    private ListView<String> classesListView;
+
     int professorId = 1;
     //int professorId = 2;
+
+    @FXML
+    private void initialize() {
+        // Initialize the list view
+        showClasses();
+    }
+
+    private void showClasses() {
+        // Connect to database
+        try (Connection connection = DatabaseManagerUtils.getConnection()) {
+            // Prepare SQL statement to retrieve classes for the specific professor_id
+            String sql = "SELECT class_id FROM classes WHERE professor_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, professorId);
+
+
+            ResultSet resultSet = statement.executeQuery();
+
+            // Populate ListView with class names
+            ObservableList<String> classIDs = FXCollections.observableArrayList();
+            while (resultSet.next()) {
+                classIDs.add(resultSet.getString("class_id"));
+            }
+            classesListView.setItems(classIDs);
+
+            // Close resources
+            resultSet.close();
+            statement.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            AlertsUtils.showErrorAlert("Unable to display classes.");
+        }
+    }
+
+
 
     /**
      * Handles adding a class.
      */
     @FXML
     private void addClass() {
+        // Validate fields
+        if (classNameId.getText().isEmpty() || classId.getText().isEmpty() ||
+                startTimeId.getText().isEmpty() || endTimeId.getText().isEmpty() ||
+                startDateId.getText().isEmpty() || endDateId.getText().isEmpty()) {
+            AlertsUtils.showErrorAlert("Please fill in all fields.");
+            return;
+        }
+
         // Connect to database
         try(Connection connection = DatabaseManagerUtils.getConnection()) {
             // Prepare insert statement into class table
@@ -67,10 +114,26 @@ public class AddClassController {
             if (rowsAffected > 0) {
                 AlertsUtils.showSuccessAlert("Class added successfully!");
             } else {
-                AlertsUtils.showErrorAlert("Failed to add class1.");
+                AlertsUtils.showErrorAlert("Failed to add class.");
                 System.out.println("error");
             }
 
+            // Check if class was added successfully
+            if (rowsAffected > 0) {
+                AlertsUtils.showSuccessAlert("Class added successfully!");
+                showClasses();
+
+                // Clear text fields
+                classNameId.clear();
+                classId.clear();
+                startTimeId.clear();
+                endTimeId.clear();
+                startDateId.clear();
+                endDateId.clear();
+            } else {
+                AlertsUtils.showErrorAlert("Failed to add class.");
+                System.out.println("error");
+            }
 
             // Close resources
             preparedStatement.close();
@@ -80,7 +143,7 @@ public class AddClassController {
 
         } catch (Exception e) {
             System.err.println("SQL Error: " + e.getMessage());
-            AlertsUtils.showErrorAlert("Failed to add class2.");
+            AlertsUtils.showErrorAlert("Failed to add class.");
             e.printStackTrace();
         }
     }
