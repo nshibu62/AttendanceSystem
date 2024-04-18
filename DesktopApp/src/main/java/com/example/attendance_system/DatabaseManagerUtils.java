@@ -10,9 +10,9 @@ import java.sql.SQLException;
 public class DatabaseManagerUtils {
 
     // JDBC URL, username, and password
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/attendanceDB"; // JDBC URL
+    private static final String JDBC_URL = "jdbc:mysql://34.173.191.42:3306/attendancedb"; // JDBC URL
     private static final String USERNAME = "root"; // JDBC username
-    private static final String PASSWORD = "Icecream123"; // JDBC password
+    private static final String PASSWORD = "monK3yban@naBread3!@3%5"; // JDBC password
 
     /**
      * Establishes a connection to the database.
