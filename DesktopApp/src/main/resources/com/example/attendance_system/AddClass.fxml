@@ -34,4 +34,8 @@
 
     <Button text="Submit" GridPane.columnIndex="0" GridPane.rowIndex="6" onAction="#addClass" />
 
+    <!-- Add label for ListView -->
+    <Label text="Current Classes" GridPane.columnIndex="10" GridPane.rowIndex="7" />
+    <ListView fx:id="classesListView" GridPane.columnIndex="10" GridPane.rowIndex="8"/>
+
 </GridPane>
