@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-
+<!-- FXML file for the attendance report -->
 <GridPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.attendance_system.AttendanceReportController"
-            prefHeight="400.0" prefWidth="600.0">
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="com.example.attendance_system.AttendanceReportController" <!-- Controller class -->
+          prefHeight="400.0" prefWidth="600.0">
+
+    <!-- Label for the title -->
     <Label text="Attendance Report" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 
+    <!-- Button to upload a file -->
     <Button fx:id="uploadButton" text="Upload File" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
+    <!-- ComboBox to choose a course -->
     <ComboBox fx:id="courseBox" promptText="Choose Course" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 
-
+    <!-- DatePicker to select a date -->
     <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
+    <!-- Button to generate the report -->
     <Button text="Generate Report" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
 </GridPane>
