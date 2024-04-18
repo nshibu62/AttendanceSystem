@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<!-- FXML file for configuring a quiz -->
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.attendance_system.ConfigureQuizController">
+            fx:controller="com.example.attendance_system.ConfigureQuizController"> <!-- Controller class -->
     <GridPane hgap="10" vgap="10">
+
+        <!-- Label for the title -->
         <Label text="Configure Quiz" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 
+        <!-- ComboBox to choose a course -->
         <ComboBox fx:id="courseBox" onAction="#showQuestions" promptText="Choose Course" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 
+        <!-- DatePicker to select quiz date -->
         <DatePicker fx:id="quizDate" onAction="#handleDate" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
+        <!-- ComboBox to choose the number of questions -->
         <ComboBox fx:id="numQuestions" onAction="#handleNumQuestions" promptText="# of Questions" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <items>
                 <FXCollections fx:factory="observableArrayList">
@@ -28,6 +27,7 @@
             </items>
         </ComboBox>
 
+        <!-- TableView to display existing quizzes -->
         <TableView fx:id="quizTableView" GridPane.columnIndex="4" GridPane.rowIndex="10">
             <columns>
                 <TableColumn text="Quiz ID" fx:id="quizIdColumn"/>
@@ -36,10 +36,13 @@
             </columns>
         </TableView>
 
+        <!-- ComboBox to choose a password -->
         <ComboBox fx:id="passwordOptions" onAction="#handlePasswordSelection" promptText="Choose Password" GridPane.columnIndex="3" GridPane.rowIndex="1" />
 
+        <!-- VBox to hold checkboxes for questions -->
         <VBox fx:id="containers" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 
+        <!-- Button to submit the quiz -->
         <Button text="Submit" onAction="#submitQuiz" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
     </GridPane>
 </ScrollPane>
