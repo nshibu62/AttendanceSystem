@@ -13,34 +13,33 @@
     <GridPane hgap="10" vgap="10">
         <Label text="Configure Quiz" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 
-        <ComboBox fx:id="courseBox" promptText="Choose Course" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <ComboBox fx:id="courseBox" onAction="#showQuestions" promptText="Choose Course" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 
-        <DatePicker fx:id="quizDate" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <DatePicker fx:id="quizDate" onAction="#handleDate" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-        <ComboBox fx:id="numQuestions" promptText="# of Questions" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <ComboBox fx:id="numQuestions" onAction="#handleNumQuestions" promptText="# of Questions" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <items>
                 <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="0"/>
                     <String fx:value="1"/>
                     <String fx:value="2"/>
                     <String fx:value="3"/>
                 </FXCollections>
             </items>
-
         </ComboBox>
 
-        <ComboBox fx:id="passwordOptions" promptText="Choose Password" GridPane.columnIndex="3" GridPane.rowIndex="1">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Password 1"/>
-                    <String fx:value="Password 2"/>
-                    <String fx:value="Password 3"/>
-                </FXCollections>
-            </items>
+        <TableView fx:id="quizTableView" GridPane.columnIndex="4" GridPane.rowIndex="10">
+            <columns>
+                <TableColumn text="Quiz ID" fx:id="quizIdColumn"/>
+                <TableColumn text="Date" fx:id="dateColumn"/>
+                <TableColumn text="Class ID" fx:id="classIdColumn"/>
+            </columns>
+        </TableView>
 
-        </ComboBox>
+        <ComboBox fx:id="passwordOptions" onAction="#handlePasswordSelection" promptText="Choose Password" GridPane.columnIndex="3" GridPane.rowIndex="1" />
 
         <VBox fx:id="containers" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 
-        <Button text="Submit" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Button text="Submit" onAction="#submitQuiz" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
     </GridPane>
 </ScrollPane>
