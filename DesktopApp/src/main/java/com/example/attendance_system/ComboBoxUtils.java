@@ -28,4 +28,26 @@ public class ComboBoxUtils {
             e.printStackTrace();
         }
     }
+
+    public static void populatePasswordsComboBox(ComboBox<String> comboBox, String classSelected) {
+        // Connect to the database and populate the ComboBox based on professorId
+        try (Connection connection = DatabaseManagerUtils.getConnection()) {
+            String query = "SELECT password FROM passwords WHERE class_id = ? ";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, classSelected);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            comboBox.getItems().clear(); // Clear existing items
+            while (resultSet.next()) {
+                comboBox.getItems().add(resultSet.getString("password"));
+            }
+
+        } catch (SQLException e) {
+            // Handle database errors
+            System.err.println("SQL Error: " + e.getMessage());
+            AlertsUtils.showErrorAlert("unable to connect to database");
+            e.printStackTrace();
+        }
+    }
 }
