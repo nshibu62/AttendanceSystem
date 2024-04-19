@@ -34,7 +34,8 @@ public class AddClassController {
     @FXML
     private ListView<String> classesListView;
 
-    int professorId = 1;
+    int professorId = ProfessorManager.getInstance().getProfessorId();
+    //int professorId = 1;
     //int professorId = 2;
 
     @FXML
