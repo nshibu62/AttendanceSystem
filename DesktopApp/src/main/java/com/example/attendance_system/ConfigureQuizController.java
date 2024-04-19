@@ -57,7 +57,8 @@ public class ConfigureQuizController {
 
     private List<Integer> selectedQuestionIds; // List to store selected question IDs
 
-    int professorId = 1;
+    int professorId = ProfessorManager.getInstance().getProfessorId();
+    //int professorId = 1;
 
     public void initialize() {
         // Initialize TableColumn cell value factories
