@@ -24,7 +24,8 @@ public class QuestionBankController {
     private ComboBox<String> courseBox;
 
     private String selectedCourse; // Variable to store the selected course
-    int professorId = 1;
+    int professorId = ProfessorManager.getInstance().getProfessorId();
+    //int professorId = 1;
     //int professorId = 2;
 
     /**
