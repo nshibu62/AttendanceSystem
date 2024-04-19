@@ -7,24 +7,32 @@
 <?import javafx.scene.text.*?>
 
 <GridPane fx:controller="com.example.attendance_system.HomeController"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+          xmlns:fx="http://javafx.com/fxml"
+          alignment="center" hgap="10" vgap="10">
+
+    <!-- Padding settings -->
     <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+
+    <!-- Text element for the title -->
     <Text text="Login"
           GridPane.columnIndex="0" GridPane.rowIndex="0"
           GridPane.columnSpan="2"/>
 
+    <!-- Label for username -->
     <Label text="User Name:"
            GridPane.columnIndex="0" GridPane.rowIndex="1"/>
 
-    <TextField
-            GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <!-- TextField for entering username -->
+    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
+    <!-- HBox for the Sign In button -->
     <HBox spacing="10" alignment="bottom_right"
           GridPane.columnIndex="1" GridPane.rowIndex="4">
         <Button text="Sign In"
-                onAction="#handleSubmitButtonAction"/>
+                onAction="#handleSubmitButtonAction"/> <!-- Action on button click -->
     </HBox>
 
+    <!-- Text element for displaying action feedback -->
     <Text fx:id="actiontarget"
           GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 </GridPane>
