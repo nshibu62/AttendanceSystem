@@ -51,3 +51,24 @@ public class ComboBoxUtils {
         }
     }
 }
+
+    public static void populateProfessorsComboBox(ComboBox<String> comboBox) {
+        // Connect to the database and populate the ComboBox based on professorId
+        try (Connection connection = DatabaseManagerUtils.getConnection()) {
+            String query = "SELECT name FROM professors";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            comboBox.getItems().clear(); // Clear existing items
+            while (resultSet.next()) {
+                comboBox.getItems().add(resultSet.getString("name"));
+            }
+
+        } catch (SQLException e) {
+            // Handle database errors
+            System.err.println("SQL Error: " + e.getMessage());
+            AlertsUtils.showErrorAlert("unable to connect to database");
+            e.printStackTrace();
+        }
+    }
