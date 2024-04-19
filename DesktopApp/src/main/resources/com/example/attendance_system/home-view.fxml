@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import java.net.*?>
 
-<GridPane fx:controller="com.example.attendance_system.HomeController" <!-- Controller class -->
-          xmlns:fx="http://javafx.com/fxml" <!-- FXML namespace -->
-          alignment="center" hgap="10" vgap="10"> <!-- GridPane properties -->
-    
-    <!-- Padding settings -->
+<GridPane fx:controller="com.example.attendance_system.HomeController"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
-    
-    <!-- Text element for the title -->
     <Text text="Login"
           GridPane.columnIndex="0" GridPane.rowIndex="0"
           GridPane.columnSpan="2"/>
-    
-    <!-- Label for username -->
-    <Label text="User Name:"
+
+    <Label text="Select Professor:"
            GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    
-    <!-- TextField for entering username -->
-    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-    
-    <!-- HBox for the Sign In button -->
+
+    <ComboBox fx:id="professorComboBox" promptText="Choose Professor"
+              GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+    <Label text="New Professor Name:" fx:id="professorNameLabel"
+           GridPane.columnIndex="0" GridPane.rowIndex="2" visible="false"/>
+    <TextField fx:id="professorNameField" visible="false"
+               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+    <Label text="New Professor ID:" fx:id="professorIdLabel"
+           GridPane.columnIndex="0" GridPane.rowIndex="3" visible="false"/>
+    <TextField fx:id="professorIdField" visible="false"
+               GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
     <HBox spacing="10" alignment="bottom_right"
           GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <Button text="Add Professor"
+                onAction="#handleAddProfessorButtonAction"/>
+        <Button fx:id="submitButton" text="Submit"
+                onAction="#handleSubmitProfessorButtonAction" visible="false"/>
         <Button text="Sign In"
-                onAction="#handleSubmitButtonAction"/> <!-- Action on button click -->
+                onAction="#handleSubmitButtonAction"/>
     </HBox>
-    
-    <!-- Text element for displaying action feedback -->
+
     <Text fx:id="actiontarget"
           GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 </GridPane>
