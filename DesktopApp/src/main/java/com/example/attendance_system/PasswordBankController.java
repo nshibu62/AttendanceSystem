@@ -24,7 +24,8 @@ public class PasswordBankController {
     // ObservableList to hold passwords for ListView
     private ObservableList<String> passwords;
 
-    int professorId = 1;
+    int professorId = ProfessorManager.getInstance().getProfessorId();
+    //int professorId = 1;
     //int professorId = 2;
 
     // Initialize method called when FXML is loaded
