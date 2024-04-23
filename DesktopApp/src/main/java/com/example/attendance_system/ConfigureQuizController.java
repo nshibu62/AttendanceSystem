@@ -250,9 +250,10 @@ public class ConfigureQuizController {
         // Store the selected course
         try (Connection connection = DatabaseManagerUtils.getConnection()) {
             // Prepare SQL statement to retrieve password_id based on the selected password
-            String sql = "SELECT password_ID FROM passwords WHERE password = ?";
+            String sql = "SELECT password_ID FROM passwords WHERE password = ? AND class_id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, passwordOptions.getValue());
+            statement.setString(2, courseBox.getValue());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 // Retrieve the password_id from the result set
