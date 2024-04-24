@@ -54,10 +54,8 @@ public class AttendanceReportController {
     @FXML
     private TableColumn<AttendanceRecord, String> classIdColumn;
 
-    // Set value of professorId for testing purposes
-    // but we need to find a way to get the professorId
-    // when professor accesses desktop app
-    int professorId = 1;
+    int professorId = ProfessorManager.getInstance().getProfessorId();
+    // int professorId = 1;
 
     @FXML
     private void initialize() {
