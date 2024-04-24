@@ -3,11 +3,13 @@ package com.example.attendance_system;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class AttendanceReportController {
 
@@ -55,7 +57,6 @@ public class AttendanceReportController {
     private TableColumn<AttendanceRecord, String> classIdColumn;
 
     int professorId = ProfessorManager.getInstance().getProfessorId();
-    // int professorId = 1;
 
     @FXML
     private void initialize() {
@@ -75,6 +76,9 @@ public class AttendanceReportController {
         response3Column.setCellValueFactory(new PropertyValueFactory<>("response3"));
         classIdColumn.setCellValueFactory(new PropertyValueFactory<>("classId"));
 
+        // Set TableView to be editable
+        attendanceTableView.setEditable(true);
+
         // Action event handler for uploadButton
         uploadButton.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
@@ -91,6 +95,33 @@ public class AttendanceReportController {
                 displayAttendanceReport(selectedDate);
             } else {
                 AlertsUtils.showErrorAlert("Please select a date.");
+            }
+        });
+
+        // Make studentStatusColumn editable
+        studentStatusColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        studentStatusColumn.setOnEditCommit(event -> {
+            // Get the new value from the edited cell
+            String newValue = event.getNewValue();
+            // Get the index of the edited row
+            int rowIndex = event.getTablePosition().getRow();
+            // Get the UTD ID of the student from the row
+            String utdId = event.getRowValue().getUtdId();
+
+            // Update the database
+            try (Connection conn = DatabaseManagerUtils.getConnection()) {
+                // Prepare SQL statement to update the student status
+                String sql = "UPDATE attendance SET student_status = ? WHERE UTD_ID = ?";
+                PreparedStatement statement = conn.prepareStatement(sql);
+                statement.setString(1, newValue);
+                statement.setString(2, utdId);
+                statement.executeUpdate();
+
+                // Close resources
+                statement.close();
+            } catch (SQLException e) {
+                AlertsUtils.showErrorAlert("Failed to update database.");
+                e.printStackTrace();
             }
         });
     }
@@ -127,32 +158,61 @@ public class AttendanceReportController {
                         System.out.println(e);
                     }
 
-                    // Insert student data into the database
-                    PreparedStatement statement = conn.prepareStatement("INSERT INTO student (class_id, UTD_ID, first_name, middle_name, last_name) VALUES (?, ?, ?, ?, ?)");
-                    statement.setString(1, fields[6]);
-                    statement.setString(2, fields[1]);
-                    statement.setString(3, fields[2]);
-                    statement.setString(4, fields[3]);
-                    statement.setString(5, fields[4]);
-                    statement.executeUpdate();
+                    try {
+                        // Insert student data into the database
+                        PreparedStatement statement = conn.prepareStatement("INSERT INTO student (class_id, UTD_ID, first_name, middle_name, last_name) VALUES (?, ?, ?, ?, ?)");
+                        statement.setString(1, courseBox.getValue());
+                        statement.setString(2, fields[3]); // Assuming Student ID is at index 3
+                        statement.setString(3, fields[1]); // Assuming First Name is at index 1
+                        statement.setString(4, fields[2]); // Assuming Middle Name is at index 2
+                        statement.setString(5, fields[0]); // Assuming Last Name is at index 0
+                        statement.executeUpdate();
+
+                        // If the insertion is successful, print "Success"
+                        AlertsUtils.showSuccessAlert("Students successfully added!");
+                    } catch (SQLException e) {
+                        // Handle database errors
+                        AlertsUtils.showErrorAlert("Failed to add students");
+                        e.printStackTrace();
+                    }
+
                 }
 
                 // Process eLearning Format
                 if (format.equals("eLearning") && lineNum > 0) {
-                    String[] fields = line.split("\\t+");
+                    // Split the line by tabs, considering quoted values
+                    String[] fields = line.split("\t(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
+                    // Remove null characters and surrounding quotes from each field
                     for (int i = 0; i < fields.length; i++) {
-                        // Remove the outside quotes from each element
-                        fields[i] = fields[i].replaceAll("\"", "");
+                        fields[i] = fields[i].replaceAll("\0", "").replaceAll("^\"|\"$", "").trim();
                     }
 
-                    if (fields.length > 1) {
-                        // Insert student data into the database
-                        PreparedStatement statement = conn.prepareStatement("INSERT INTO student (UTD_ID, first_name, last_name) VALUES (?, ?, ?)");
-                        statement.setString(1, fields[3]);
-                        statement.setString(2, fields[1]);
-                        statement.setString(3, fields[0]);
-                        statement.executeUpdate();
+                    // Print out the resulting array for debugging
+                    System.out.println(Arrays.toString(fields));
+
+
+                    // Check if the fields array is valid
+                    if (fields.length >= 5) { // Assuming you have at least 5 fields in each line
+                        try {
+                            // Insert student data into the database
+                            PreparedStatement statement = conn.prepareStatement("INSERT INTO student (class_id, UTD_ID, first_name, last_name) VALUES (?, ?, ?, ?)");
+                            statement.setString(1, courseBox.getValue());
+                            statement.setString(2, fields[3]); // Assuming Student ID is at index 3
+                            statement.setString(3, fields[1]); // Assuming First Name is at index 1
+                            statement.setString(4, fields[0]); // Assuming Last Name is at index 0
+                            int rowsAffected = statement.executeUpdate();
+
+                            // Check if the execution was successful
+                            if (rowsAffected > 0) {
+                                AlertsUtils.showSuccessAlert("Students successfully added!");
+                            }
+                            
+                        } catch (SQLException e) {
+                            // Handle database errors
+                            AlertsUtils.showErrorAlert("Failed to add students");
+                            e.printStackTrace();
+                        }
                     }
                 }
 
@@ -241,4 +301,3 @@ public class AttendanceReportController {
         }
     }
 }
-
